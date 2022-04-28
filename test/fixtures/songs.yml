@@ -5,9 +5,11 @@ one:
   artist: MyString
   spotify_id: MyString
   popularity: 1
+  image: MyString
 
 two:
   name: MyString
   artist: MyString
   spotify_id: MyString
   popularity: 1
+  image: MyString

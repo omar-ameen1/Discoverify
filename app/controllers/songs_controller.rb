@@ -4,8 +4,29 @@ class SongsController < ApplicationController
   # GET /songs or /songs.json
   def index
     @songs = Song.all
+    render json: @songs
   end
 
+  def top_10
+    s_tracks = RSpotify::Playlist.find("1276640268","2kpoUUJ5a4Cw3feTkFJhZ2").tracks
+    @tracks = s_tracks.map do |s_track|
+      Song.new_from_spotify_track(s_track)
+    end
+    render json @tracks
+  end
+
+  def search_genre
+    s_tracks = RSpotify::Recommendations.generate(limit: 20, seed_genres: ['hip-hop'],
+                                                  max_popularity: 0, target_popularity: 0).tracks
+    @tracks = s_tracks.map do |s_track|
+      Song.create_from_spotify_track(s_track)
+    end
+    @tracks.each do |track|
+      pp track[:name]
+      pp track[:artist]
+    end
+    render json: @tracks
+  end
   # GET /songs/1 or /songs/1.json
   def show
   end
@@ -21,8 +42,6 @@ class SongsController < ApplicationController
 
   # POST /songs or /songs.json
   def create
-    @song = Song.new(song_params)
-
     respond_to do |format|
       if @song.save
         format.html { redirect_to song_url(@song), notice: "Song was successfully created." }
@@ -65,6 +84,6 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.require(:song).permit(:name, :artist, :spotify_id, :popularity)
+      params.require(:song).permit(:name, :artist, :spotify_id, :popularity, :image)
     end
 end

@@ -5,6 +5,7 @@ require "rails/all"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+RSpotify::authenticate("b6a149a5194a49fca80e7be76535e321", "1233a74e4e824ce89e948e0a686f61fe")
 
 module DiscoverifySite
   class Application < Rails::Application

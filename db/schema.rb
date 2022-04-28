@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_28_043811) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_28_061526) do
   create_table "playlist_songs", force: :cascade do |t|
     t.integer "playlist_id", null: false
     t.integer "song_id", null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_28_043811) do
     t.string "artist"
     t.string "spotify_id"
     t.integer "popularity"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

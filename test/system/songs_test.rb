@@ -15,6 +15,7 @@ class SongsTest < ApplicationSystemTestCase
     click_on "New song"
 
     fill_in "Artist", with: @song.artist
+    fill_in "Image", with: @song.image
     fill_in "Name", with: @song.name
     fill_in "Popularity", with: @song.popularity
     fill_in "Spotify", with: @song.spotify_id
@@ -29,6 +30,7 @@ class SongsTest < ApplicationSystemTestCase
     click_on "Edit this song", match: :first
 
     fill_in "Artist", with: @song.artist
+    fill_in "Image", with: @song.image
     fill_in "Name", with: @song.name
     fill_in "Popularity", with: @song.popularity
     fill_in "Spotify", with: @song.spotify_id
