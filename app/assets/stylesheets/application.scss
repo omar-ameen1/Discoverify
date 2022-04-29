@@ -1,21 +1,23 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+@import url('https://fonts.googleapis.com/css?family=Gentium+Basic&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import "rails_bootstrap_forms";
 
 $theme-colors: (
-        "primary": #01256e,
-        "secondary": #95001a
+        "primary": #1DB954,
+        "secondary": #191414
 );
 
 $navbar-default-color: (
-        #01256e,
+        #191414,
 );
 
-@import url('https://fonts.googleapis.com/css?family=Gentium+Basic&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+$btn-link-color:             #1DB954;
 
 .navbar-brand {
   font-family: 'Gentium Basic', serif;
-  background-color: #01256e;
+  background-color: #1DB954;
   width: 100%;
 }
 
@@ -23,11 +25,15 @@ $navbar-default-color: (
   font-family: 'Gentium Basic', serif;
 }
 
+.nav-link.active.mt-1 {
+  color: rgb(35, 215, 96);
+}
+
 h1 {
   font-size: 30px;
   padding-top: 20px;
   padding-bottom: 20px;
-  color: #01256e;
+  color: #1DB954;
   font-weight: 500;
   line-height: 1.25;
   font-family: 'Gentium Basic', serif;
@@ -38,7 +44,7 @@ h2 {
   font-size: 25px;
   padding-top: 20px;
   padding-bottom: 20px;
-  color: #01256e;
+  color: #1DB954;
   font-weight: 300;
   line-height: 1.25;
   margin: 2em 0 .67em;
@@ -49,7 +55,7 @@ h3 {
   font-size: 16px;
   padding-top: 20px;
   padding-bottom: 10px;
-  color: #01256e;
+  color: #1DB954;
   font-weight: 300;
   line-height: 1.25;
   font-family: 'Gentium Basic', serif;
@@ -74,3 +80,4 @@ footer {
   text-align: center;
   color: #cfd0d2;
 }
+

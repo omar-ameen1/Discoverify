@@ -1,12 +1,11 @@
-<h1> Log In </h1>
-
+<body class="bg-opacity-75 bg-black">
 <% if @message %>
   <div class="alert alert-danger" role="alert">
     <%=@message %>
   </div>
 <% end %>
 
-<!-- TODO: Replace this with a form -->
 <h3>
   <%= render "form" %>
 </h3>
+</body>

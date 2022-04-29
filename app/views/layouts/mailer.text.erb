@@ -1,1 +1,13 @@
 <%= yield %>
+<form id="form_search" name="form_search" method="get" action="/search" class="form-floating col-md-4">
+  <div class="form-group">
+    <div class="input-group d-flex justify-content-center my-4">
+      <input class="form-control" placeholder="Search for..." type="text">
+      <span class="input-group-btn">
+          <button type="submit" class="btn text-white" style="color: white" value="search">
+            <i class="bi bi-search"></i>
+          </button>
+      </span>
+    </div>
+  </div>
+</form>

@@ -1,8 +1,9 @@
+
+<body class="bg-opacity-75 bg-black">
+<div class="container p-5 mb-4 rounded-3" style="background-color: black">
 <%= form_with(model: user) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
         <% user.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,23 +11,29 @@
       </ul>
     </div>
   <% end %>
+    <div class="card bg-black">
+      <h1 style="color: rgb(35, 215, 96)">New user</h1>
+      <div class="card-body">
+      <div class="mb-3">
+        <%=form.label "full name", {class: "form-label"}, style: "color: rgb(35, 215, 96)" %>
+        <%=form.text_field :full_name, {class: "form-control"} %>
+      </div>
 
-  <div>
-    <%= form.label :full_name, style: "display: block" %>
-    <%= form.text_field :full_name %>
+      <div class="mb-3">
+        <%=form.label "username", {class: "form-label"}, style: "color: rgb(35, 215, 96)" %>
+        <%=form.text_field :username, {class: "form-control"} %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label "password", {class: "form-label"}, style: "color: rgb(35, 215, 96)" %>
+        <%= form.password_field :password_hash, class: "form-control" %>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
-  </div>
-
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.password_field :password_hash %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <p>
+  <div class ="actions">
+    <%= form.submit "Register", class:"btn btn-lg", style: "background: rgb(35, 215, 96)" %>
   </div>
 <% end %>
+</div>
+</body>

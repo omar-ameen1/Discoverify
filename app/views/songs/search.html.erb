@@ -1,40 +1,7 @@
-<p style="color: green"><%= notice %></p>
 <body class="bg-opacity-75 bg-black">
-
-<div class="row">
-  <div class="row align-items-md-stretch my-4">
-    <div class="h-100 p-5 bg-dark rounded-3">
-      <h3 class="d-flex justify-content-center display-1" style="color: rgb(35, 215, 96)">Search for new music.</h3>
-      <div class="d-flex justify-content-center">
-        <%= form_tag(search_path, method: :get) do %>
-        <%= text_field_tag(:search, params[:search]) %>
-          <%= submit_tag("Search") %>
-        <%end %>
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class="row align-items-md-stretch mb-4">
-    <div class="col-md-6">
-      <div class="h-100 p-5 text-white bg-dark rounded-3">
-        <h2>Smart Recommendations.</h2>
-        <p>Get song recommendations based on your favorite songs and genres. No Spotify login required.</p>
-        <button class="btn btn-outline-light" type="button">Discover</button>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="h-100 p-5 bg-dark text-white rounded-3">
-        <h2>Hipster Mode</h2>
-        <p>Discover niche and unique music that nobody else is listening to.</p>
-        <button class="btn btn-outline-light" type="button">Try it out</button>
-      </div>
-    </div>
-  </div>
-  <h3 class="d-flex justify-content-center display-5" style="color: rgb(35, 215, 96)">What others are listening to:</h3>
-</body>
 <div class="row">
   <div id="songs" class="d-flex flex-nowrap bg-black rounded-3">
-    <% @songs.each_slice(2) do |song1, song2| %>
+    <% @tracks.each_slice(2) do |song1, song2| %>
       <div class="container-fluid">
         <div class="row mt-3 mb-4 d-flex">
           <div class="col-sm-6">
@@ -45,7 +12,7 @@
                 <p class="card-text " style="color: rgb(35, 215, 96)"><%=h truncate("#{song1.artist}", :length => 120) %></p>
                 <div class="mt-auto" style="background: black">
                   <p class="card-text"><small class="text-muted">Popularity: <%="#{song1.popularity}" %></small></p>
-                  <a href="songs/<%="#{song1.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">View Song</a>
+                  <%= link_to("Add to library", "/add_song/#{current_user.id}/#{song1.spotify_id}", class: "btn btn-primary", :method => :post) %>
                 </div>
               </div>
             </div>
@@ -59,7 +26,7 @@
                   <p class="card-text" style="color: rgb(35, 215, 96)"><%=h truncate("#{song2.artist}", :length => 120) %></p>
                   <div class="mt-auto" style="background: black">
                     <p class="card-text"><small class="text-muted">Popularity: <%="#{song2.popularity}" %></small></p>
-                    <a href="songs/<%="#{song2.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">View Song</a>
+                    <%= link_to("Add to library", "/add_song/#{current_user.id}/#{song2.spotify_id}", class: "btn btn-primary", :method => :post) %>
                   </div>
                 </div>
               </div>

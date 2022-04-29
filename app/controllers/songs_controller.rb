@@ -4,7 +4,6 @@ class SongsController < ApplicationController
   # GET /songs or /songs.json
   def index
     @songs = Song.all
-    render json: @songs
   end
 
   def top_10
@@ -29,6 +28,19 @@ class SongsController < ApplicationController
   end
   # GET /songs/1 or /songs/1.json
   def show
+  end
+
+  def search
+    if params[:search].empty?
+      redirect_to songs_path
+    else
+      s_tracks = RSpotify::Track.search(params[:search])
+      @tracks = s_tracks.map do |s_track|
+        unless Song.all.include?(Song.where(spotify_id: s_track.id))
+          Song.new_from_spotify_track(s_track)
+        end
+    end
+    end
   end
 
   # GET /songs/new
@@ -66,6 +78,7 @@ class SongsController < ApplicationController
     end
   end
 
+
   # DELETE /songs/1 or /songs/1.json
   def destroy
     @song.destroy
@@ -84,6 +97,6 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.require(:song).permit(:name, :artist, :spotify_id, :popularity, :image)
+      params.require(:song).permit(:name, :artist, :spotify_id, :popularity, :image, :search)
     end
 end

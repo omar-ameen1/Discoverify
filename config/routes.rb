@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   # root "articles#index"
   root to: 'pages#home'
 
-  get 'songtest', to: 'songs#search_genre'
+  get '/songtest', to: 'songs#search_genre'
   get '/login', to: 'sessions#new'
   get '/logout', to: 'sessions#destroy'
   delete '/logout', to: 'sessions#destroy'
-  post '/login', to:'sessions#create'
+  post '/login', to: 'sessions#create'
+  get '/search', to: 'songs#search'
+
+  get "/add_song/:user_id/:song_id", to: 'songs_users#add_song'
 end

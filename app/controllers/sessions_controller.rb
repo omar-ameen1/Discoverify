@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     if @user
       if @user.password == params[:password_hash]
         session[:user_id] = @user.id
-        redirect_to @user
+        redirect_to songs_path
       else
         render :new
       end

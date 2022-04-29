@@ -1,15 +1,26 @@
+<link href="application.scss" rel="stylesheet">
+
+<body class="bg-opacity-75 bg-black">
+<div class="container p-5 mb-4 rounded-3" style="background-color: black">
 <%= form_with local:true, url: '/login', method: :post do |form| %>
-  <div class="field">
-    <%= form.label "username", style: "width: 75px" %>
-    <%= form.text_field :username %>
+  <div class="card bg-black">
+    <h1 style="color: rgb(35, 215, 96)"> Log In </h1>
+    <div class="card-body">
+      <div class="mb-3">
+        <%=form.label "username", {class: "form-label"}, style: 'color: rgb(35, 215, 96)' %>
+        <%=form.text_field :username, {class: "form-control"} %>
+      </div>
+      <div class="mb-3">
+        <%= form.label "password", {class: "form-label"}, style: 'color: rgb(35, 215, 96)' %>
+        <%= form.password_field :password_hash, class: "form-control" %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= form.label "password", style: "width: 75px" %>
-    <%= form.password_field :password_hash %>
-  </div>
-  <p>
-    No account? <%= link_to "Register!", "/users/new", method: :get, style: "text-decoration: none" %></p>
-  <div class ="actions">
-    <%= form.submit "Save", class:"btn btn-outline-primary" %>
-  </div>
-<% end %>
+    <p style="color: white">
+      No account? <%= link_to "Register!", "/users/new", method: :get, style: 'color: rgb(35, 215, 96)' %></p>
+    <div class ="actions">
+      <%= form.submit "Log in", class:"btn btn-lg", style: 'background: rgb(35, 215, 96)' %>
+    </div>
+  <% end %>
+</div>
+</body>
