@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   get '/search', to: 'songs#search'
 
   get "/add_song/:user_id/:song_id", to: 'songs_users#add_song'
+  get "/smart/:user_id", to: 'songs#smart'
+  get "/smart/:user_id/:song_id", to: 'songs#add_to_session'
 end

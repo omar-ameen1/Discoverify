@@ -6,8 +6,10 @@ class SongsUsersController < ApplicationController
 
   def add_song
     session[:return_to] ||= request.referer
-    @user.songs << @song
-    redirect_to session.delete(:return_to)
+    unless @user.songs.include? @song
+      @user.songs << @song
+      redirect_back(fallback_location: songs_path)
+    end
   end
 
   def delete_song
@@ -21,12 +23,12 @@ class SongsUsersController < ApplicationController
 
   def set_user
     puts params
-    @user = User.find(params[:user_id])
+    @user = User.find_by(params[:user_id])
   end
 
   private
 
   def set_song
-    @song = Song.find(params[:song_id])
+    @song = Song.all.find_by(spotify_id: params[:song_id])
   end
 end

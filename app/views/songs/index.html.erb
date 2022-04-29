@@ -19,14 +19,14 @@
       <div class="h-100 p-5 text-white bg-dark rounded-3">
         <h2>Smart Recommendations.</h2>
         <p>Get song recommendations based on your favorite songs and genres. No Spotify login required.</p>
-        <button class="btn btn-outline-light" type="button">Discover</button>
+        <a href="/smart/<%="#{current_user.id}" %>" class="btn btn-outline-light" type="button">Discover</a>
       </div>
     </div>
     <div class="col-md-6">
       <div class="h-100 p-5 bg-dark text-white rounded-3">
         <h2>Hipster Mode</h2>
         <p>Discover niche and unique music that nobody else is listening to.</p>
-        <button class="btn btn-outline-light" type="button">Try it out</button>
+        <a class="btn btn-outline-light" type="btn">Try it out</a>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
                 <p class="card-text " style="color: rgb(35, 215, 96)"><%=h truncate("#{song1.artist}", :length => 120) %></p>
                 <div class="mt-auto" style="background: black">
                   <p class="card-text"><small class="text-muted">Popularity: <%="#{song1.popularity}" %></small></p>
-                  <a href="songs/<%="#{song1.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">View Song</a>
+                  <a href="/songs/<%="#{song1.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">View Song</a>
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@
                   <p class="card-text" style="color: rgb(35, 215, 96)"><%=h truncate("#{song2.artist}", :length => 120) %></p>
                   <div class="mt-auto" style="background: black">
                     <p class="card-text"><small class="text-muted">Popularity: <%="#{song2.popularity}" %></small></p>
-                    <a href="songs/<%="#{song2.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">View Song</a>
+                    <a href="/songs/<%="#{song2.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">View Song</a>
                   </div>
                 </div>
               </div>

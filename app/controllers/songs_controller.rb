@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
   before_action :set_song, only: %i[ show edit update destroy ]
+  before_action :authenticate_user
 
   # GET /songs or /songs.json
   def index
@@ -30,17 +31,37 @@ class SongsController < ApplicationController
   def show
   end
 
+  def add_to_session
+    (session[:songs] ||= []) << params[:song_id]
+    pp session[:songs]
+    pp params[:song_id]
+    redirect_back(fallback_location: "/smart/#{current_user.id}")
+  end
+
+  def session_songs
+    JSON.parse(session[:songs])
+  end
+
   def search
     if params[:search].empty?
       redirect_to songs_path
     else
       s_tracks = RSpotify::Track.search(params[:search])
       @tracks = s_tracks.map do |s_track|
-        unless Song.all.include?(Song.where(spotify_id: s_track.id))
-          Song.new_from_spotify_track(s_track)
+        if Song.all.include?(Song.find_by(spotify_id: s_track.id))
+          Song.find_by(spotify_id: s_track.id)
+        else
+          Song.create_from_spotify_track(s_track)
         end
+      end
     end
-    end
+  end
+
+  def smart
+
+  end
+
+  def smart_search
   end
 
   # GET /songs/new
@@ -92,11 +113,11 @@ class SongsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_song
-      @song = Song.find(params[:id])
+      @song = Song.find_by(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def song_params
       params.require(:song).permit(:name, :artist, :spotify_id, :popularity, :image, :search)
     end
-end
+  end

@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 <div class="container">
-  <div class="row">
+  <div class="row border border-danger">
     <div class="col">
       <div class="row">
         <h1><%="#{@user.full_name}" %></h1>
@@ -15,13 +15,13 @@
         <dt class="col-sm-3">Status</dt>
       </dl>
     </div>
-    <div class="col">
+    <div class="col border border-warning">
       <div class="d-flex justify-content-center">
         <h1>Songs</h1>
       </div>
-      <div id="courses" class="d-flex flex-nowrap">
+      <div id="songs" class="d-flex flex-nowrap">
         <% @user.songs.each_slice(2) do |song1, song2| %>
-          <div class="container">
+          <div class="container-fluid">
             <div class="row mt-3 mb-4 d-flex">
               <div class="col-sm-6">
                 <div class="card text-center h-100 bg-black">
@@ -42,29 +42,20 @@
                     <div class="card-body">
                       <%=image_tag(song2.image, size: "200x200") %>
                       <h5 class="card-title mt-3" style="color: rgb(35, 215, 96)"><%="#{song2.name}" %></h5>
-                      <p class="card-text " style="color: rgb(35, 215, 96)"><%=h truncate("#{song2.artist}", :length => 120) %></p>
+                      <p class="card-text" style="color: rgb(35, 215, 96)"><%=h truncate("#{song2.artist}", :length => 120) %></p>
                       <div class="mt-auto" style="background: black">
                         <p class="card-text"><small class="text-muted">Popularity: <%="#{song2.popularity}" %></small></p>
                         <a href="songs/<%="#{song2.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">View Song</a>
                       </div>
                     </div>
                   </div>
+                </div>
               <%end %>
         <% end %>
         </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="container">
-  <% if @user == current_user %>
-    <a href="/users/<%="#{@user.id}" %>/edit" class="btn btn-primary">Edit User</a>
-  <%end %>
-  <a href="<%=users_path %>" class="btn btn-primary">Back to Users</a>
-  <% if @user == current_user %>
-    <%= link_to("Delete Account", @user, class: "btn btn-primary", :method => :delete) %>
-  <%end %>
 </div>
 </div>
 
