@@ -1,3 +1,4 @@
+<body class="bg-danger">
 <p style="color: green"><%= notice %></p>
 <div class="container">
   <div class="row">
@@ -35,6 +36,9 @@
                     <div class="mt-auto" style="background: black">
                       <p class="card-text"><small class="text-muted">Popularity: <%="#{song1.popularity}" %></small></p>
                       <a href="songs/<%="#{song1.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">View Song</a>
+                      <% if @user == current_user %>
+                      <a href="/delete_song/<%=current_user.id %>/<%=song1.id %>" class="btn btn-lg mt-3" style="background: rgb(35, 215, 96)">Remove song</a>
+                      <% end %>
                     </div>
                   </div>
                 </div>
@@ -49,6 +53,10 @@
                       <div class="mt-auto" style="background: black">
                         <p class="card-text"><small class="text-muted">Popularity: <%="#{song2.popularity}" %></small></p>
                         <a href="songs/<%="#{song2.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">View Song</a>
+                        <% if @user == current_user %>
+                          <a href="/delete_song/<%=current_user.id %>/<%=song2.id %>" class="btn btn-lg mt-3" style="background: rgb(35, 215, 96)">Remove song</a>
+                        <% end %>
+
                       </div>
                     </div>
                   </div>
@@ -61,4 +69,5 @@
     </div>
 </div>
 </div>
+</body>
 

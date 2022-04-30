@@ -6,8 +6,6 @@ class SongsUsersController < ApplicationController
 
   def add_song
     session[:return_to] ||= request.referer
-    puts current_user.id
-    puts @user.username
     unless @user.songs.include? @song
       @user.songs << @song
       redirect_back(fallback_location: songs_path)
@@ -15,9 +13,11 @@ class SongsUsersController < ApplicationController
   end
 
   def delete_song
+    session[:return_to] ||= request.referer
+    @song = Song.find_by(id: params[:song_id])
     if @user.songs.include? @song
       @user.songs.delete(@song)
-      redirect_to @user
+      redirect_back(fallback_location: songs_path)
     end
   end
 
