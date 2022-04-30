@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 <div class="container">
-  <div class="row border border-danger">
+  <div class="row">
     <div class="col">
       <div class="row">
         <h1><%="#{@user.full_name}" %></h1>
@@ -11,11 +11,14 @@
 
         <dt class="col-sm-3">Username</dt>
         <dd class="col-sm-9"><%=@user.username %></dd>
-
-        <dt class="col-sm-3">Status</dt>
       </dl>
+      <div class="row">
+        <h2>Playlists:</h2>
+      </div>
+      <div class="row">
+      </div>
     </div>
-    <div class="col border border-warning">
+    <div class="col">
       <div class="d-flex justify-content-center">
         <h1>Songs</h1>
       </div>

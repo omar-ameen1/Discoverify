@@ -32,14 +32,36 @@ class SongsController < ApplicationController
   end
 
   def add_to_session
-    (session[:songs] ||= []) << params[:song_id]
-    pp session[:songs]
-    pp params[:song_id]
+    (session[:songs] ||= [])
+    unless session[:songs].include? params[:song_id]
+      session[:songs] << params[:song_id]
+    end
     redirect_back(fallback_location: "/smart/#{current_user.id}")
   end
 
   def session_songs
     JSON.parse(session[:songs])
+  end
+
+  def clear_session
+
+  end
+
+  def smart_recs
+    sarr = session[:songs].compact
+    s_tracks = sarr.map do |song|
+      s = Song.find_by(id: song)
+      s.spotify_id
+    end
+    @recs = RSpotify::Recommendations.generate(limit: 4, seed_tracks: s_tracks)
+    @stracks = @recs.tracks
+    @tracks = @stracks.map do |t|
+      if Song.all.include?(Song.find_by(spotify_id: t.id))
+        Song.find_by(spotify_id: t.id)
+      else
+        Song.create_from_spotify_track(t)
+      end
+    end
   end
 
   def search

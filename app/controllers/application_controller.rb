@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def same_user
+    @user = current_user
     unless @user == current_user
       redirect_to @user
     end

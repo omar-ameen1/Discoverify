@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    redirect_to "/users/#{current_user.id}"
   end
 
   # GET /users/1 or /users/1.json

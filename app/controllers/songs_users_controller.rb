@@ -6,6 +6,8 @@ class SongsUsersController < ApplicationController
 
   def add_song
     session[:return_to] ||= request.referer
+    puts current_user.id
+    puts @user.username
     unless @user.songs.include? @song
       @user.songs << @song
       redirect_back(fallback_location: songs_path)
