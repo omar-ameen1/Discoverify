@@ -6,10 +6,10 @@
         <div class="h-100 p-5 bg-dark rounded-3">
           <h3 class="d-flex justify-content-center display-5" style="color: rgb(35, 215, 96)">Pick at least 3 songs to seed your recommendation.</h3>
           <% if session[:songs] %>
-            <% if session[:songs].size > 3 %>
+            <% if session[:songs].size >= 3 %>
               <div class="col text-center">
             <a class="mt-4 btn btn-lg" href="/submit" style="background: rgb(35, 215, 96)">Submit</a>
-          </div>
+              </div>
             <% end %>
           <% end %>
         </div>

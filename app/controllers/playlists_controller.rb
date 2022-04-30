@@ -1,9 +1,11 @@
 class PlaylistsController < ApplicationController
+  before_action :get_user
   before_action :set_playlist, only: %i[ show edit update destroy ]
 
   # GET /playlists or /playlists.json
   def index
-    @playlists = Playlist.all
+    puts "ASDQWADFAGFSEGF"
+    redirect_to @user
   end
 
   # GET /playlists/1 or /playlists/1.json
@@ -12,33 +14,37 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists/new
   def new
-    @playlist = Playlist.new
+    puts "XDSDXDXDXD"
+    puts params
   end
 
   # GET /playlists/1/edit
   def edit
   end
 
+  def add
+    p "PARAMS#{params}"
+    @song = Song.find_by(id: params[:song_id])
+    puts @user.inspect
+    session[:return_to] ||= request.referer
+    unless @playlist.songs.include? @song
+      @playlist.songs << @song
+      redirect_back(fallback_location: @user)
+    end
+  end
+
   # POST /playlists or /playlists.json
   def create
-    @playlist = Playlist.new(playlist_params)
-
-    respond_to do |format|
-      if @playlist.save
-        format.html { redirect_to playlist_url(@playlist), notice: "Playlist was successfully created." }
-        format.json { render :show, status: :created, location: @playlist }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @playlist.errors, status: :unprocessable_entity }
-      end
-    end
+    puts "ASDASDA#{params}"
+    @playlist = Playlist.create(name: params[:pname], user_id: @user.id)
+    redirect_to @user
   end
 
   # PATCH/PUT /playlists/1 or /playlists/1.json
   def update
     respond_to do |format|
       if @playlist.update(playlist_params)
-        format.html { redirect_to playlist_url(@playlist), notice: "Playlist was successfully updated." }
+        format.html { redirect_to user_playlist_path(@user), notice: "Playlist was successfully updated." }
         format.json { render :show, status: :ok, location: @playlist }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +58,7 @@ class PlaylistsController < ApplicationController
     @playlist.destroy
 
     respond_to do |format|
-      format.html { redirect_to playlists_url, notice: "Playlist was successfully destroyed." }
+      format.html { redirect_to user_playlists_path(@user), notice: "Playlist was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -60,11 +66,15 @@ class PlaylistsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_playlist
-      @playlist = Playlist.find(params[:id])
+      @playlist = Playlist.where(user_id: @user.id)
     end
 
     # Only allow a list of trusted parameters through.
     def playlist_params
-      params.require(:playlist).permit(:name, :user_id)
+      params.require(:playlists).permit(:name, :user_id)
     end
+
+  def get_user
+    @user = User.find(params[:user_id])
+  end
 end

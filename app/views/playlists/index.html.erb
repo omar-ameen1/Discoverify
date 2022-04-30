@@ -3,12 +3,13 @@
 <h1>Playlists</h1>
 
 <div id="playlists">
+  <% @playlists = Playlist.where(user_id: @user.id) %>
   <% @playlists.each do |playlist| %>
     <%= render playlist %>
     <p>
-      <%= link_to "Show this playlist", playlist %>
+      <%= link_to "Show this playlist", @playlist %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New playlist", new_playlist_path %>
+<%= link_to "New playlist", new_user_playlist_path %>

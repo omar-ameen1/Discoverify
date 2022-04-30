@@ -17,6 +17,19 @@
         <h2>Playlists:</h2>
       </div>
       <div class="row">
+        <% @playlists = Playlist.where(user_id: @user.id) %>
+        <% if @playlists %>
+          <% @playlists.each do |playlist| %>
+            <p> <%=playlist.name %> </p>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="row">
+        <% if @user == current_user %>
+        <div class="col text-left">
+          <a class="mt-4 btn btn-lg" href="<%= current_user.id %>/playlists/new" style="background: rgb(35, 215, 96)">New Playlist</a>
+        </div>
+          <% end %>
       </div>
     </div>
     <div class="col">

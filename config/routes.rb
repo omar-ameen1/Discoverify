@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   resources :songs
-  resources :users
-  resources :playlists
+
+  resources :users do
+    resources :playlists
+    get '/new', to: 'playlists#new'
+    get '/create', to: 'playlists#create'
+    get 'playlists/add/:song_id', to: 'playlists#add'
+    get '/users/:user_id/playlists', to: 'users#index'
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -20,4 +27,5 @@ Rails.application.routes.draw do
   get "/smart/:user_id", to: 'songs#smart'
   get "/smart/:user_id/:song_id", to: 'songs#add_to_session'
   get "/submit", to: 'songs#smart_recs'
-end
+
+  end

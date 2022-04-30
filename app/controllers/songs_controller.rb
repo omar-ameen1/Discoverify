@@ -39,16 +39,15 @@ class SongsController < ApplicationController
     redirect_back(fallback_location: "/smart/#{current_user.id}")
   end
 
-  def session_songs
-    JSON.parse(session[:songs])
-  end
-
   def clear_session
 
   end
 
   def smart_recs
-    sarr = session[:songs].compact
+    if session[:songs].size > 0
+      session[:stored] = session[:songs]
+    end
+    sarr = session[:stored].compact
     s_tracks = sarr.map do |song|
       s = Song.find_by(id: song)
       s.spotify_id
@@ -62,6 +61,7 @@ class SongsController < ApplicationController
         Song.create_from_spotify_track(t)
       end
     end
+    session[:songs] = []
   end
 
   def search
