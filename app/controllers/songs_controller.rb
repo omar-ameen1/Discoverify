@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: %i[ show edit update destroy ]
+  before_action :set_song, only: %i[ edit update destroy ]
   before_action :authenticate_user
 
   # GET /songs or /songs.json
@@ -27,8 +27,15 @@ class SongsController < ApplicationController
     end
     render json: @tracks
   end
+
   # GET /songs/1 or /songs/1.json
   def show
+    if (@song = Song.find_by(id: params[:song_id]).nil?)
+      @song = Song.find_by(id: params[:id])
+    else
+      @song = Song.find_by(id: params[:song_id])
+    end
+    puts @song.inspect
   end
 
   def add_to_session
@@ -69,6 +76,7 @@ class SongsController < ApplicationController
         if Song.all.include?(Song.find_by(spotify_id: s_track.id))
           Song.find_by(spotify_id: s_track.id)
         else
+          puts "SADSDASDASDASDASDSAD#{s_track.preview_url}"
           Song.create_from_spotify_track(s_track)
         end
       end

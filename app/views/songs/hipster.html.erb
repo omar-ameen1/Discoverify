@@ -1,4 +1,7 @@
+<body class="text-white bg-dark">
 <% @options = RSpotify::Recommendations.available_genre_seeds %>
+<div class="display-1 mb-3">Hipster Mode.</div>
+<div class="display-5 mb-3 text-center">Choose Genre.</div>
 
 <form href="/hipster/genres">
   <%= form_tag "/hipster/genres" do %>
@@ -6,3 +9,4 @@
     <%= submit_tag("Confirm Genre", class: 'btn btn-large bg-black text-white my-4') %>
   <% end %>
 </form>
+</body>

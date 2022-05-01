@@ -30,4 +30,5 @@ Rails.application.routes.draw do
   get "/submit", to: 'songs#smart_recs'
   get "/hipster", to: 'songs#hipster'
   post '/hipster/genres', to: 'songs#hipster_recs'
-  end
+  get "users/songs/:song_id", to: "songs#show"
+end
