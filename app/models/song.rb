@@ -16,6 +16,7 @@ class Song < ApplicationRecord
       image: spotify_track.album.images[0]["url"],
       artist: spotify_track.artists[0].name,
       popularity: get_popularity(spotify_track),
+      preview: spotify_track.preview_url
     )
   end
 

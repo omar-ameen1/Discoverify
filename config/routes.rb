@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     resources :playlists
     get 'playlists/new', to: 'playlists#new'
     post 'playlists/create', to: 'playlists#create'
-    get 'playlists/add/:song_id', to: 'playlists#add'
+    get 'playlists/:id/add/:song_id', to: 'playlists#add'
+    get 'playlists/:id/remove/:song_id', to: 'playlists#remove'
     get '/users/:user_id/playlists', to: 'users#index'
   end
 
@@ -27,5 +28,6 @@ Rails.application.routes.draw do
   get "/smart/:user_id", to: 'songs#smart'
   get "/smart/:user_id/:song_id", to: 'songs#add_to_session'
   get "/submit", to: 'songs#smart_recs'
-
+  get "/hipster", to: 'songs#hipster'
+  post '/hipster/genres', to: 'songs#hipster_recs'
   end

@@ -39,10 +39,6 @@ class SongsController < ApplicationController
     redirect_back(fallback_location: "/smart/#{current_user.id}")
   end
 
-  def clear_session
-
-  end
-
   def smart_recs
     if session[:songs].size > 0
       session[:stored] = session[:songs]
@@ -84,6 +80,27 @@ class SongsController < ApplicationController
   end
 
   def smart_search
+  end
+
+  def hipster
+    if params[:genre]
+      hipster_recs
+    end
+  end
+
+  def hipster_recs
+    @recs = RSpotify::Recommendations.generate(seed_genres: params[:genre].lines.to_a, limit: 3, max_popularity: 10, target_popularity: 0)
+    @htracks = @recs.tracks
+    @tracks = @htracks.map do |t|
+      if Song.all.include?(Song.find_by(spotify_id: t.id))
+        Song.find_by(spotify_id: t.id)
+      else
+        Song.create_from_spotify_track(t)
+      end
+    end
+    render "songs/hipster_recs"
+    puts @recs.inspect
+    puts @tracks.inspect
   end
 
   # GET /songs/new

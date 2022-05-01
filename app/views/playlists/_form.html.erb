@@ -1,4 +1,6 @@
- <%= form_tag("/users/#{@user.id}/playlists/create", method: :post) do %>
-    <%= text_field_tag(:name, params[:name]) %>
-    <%= submit_tag("Create Playlist") %>
-  <%end %>
+<body class="bg-dark">
+<%= form_tag("/users/#{@user.id}/playlists/create", method: :post) do %>
+  <%= text_field_tag(:name, params[:name]) %>
+  <%= submit_tag("Create Playlist") %>
+<%end %>
+</body>

@@ -19,16 +19,25 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists/1/edit
   def edit
-
+    @playlist = Playlist.find_by(id: params[:id])
   end
 
   def add
-    p "PARAMS#{params}"
+    @playlist = Playlist.find_by(id: params[:id])
     @song = Song.find_by(id: params[:song_id])
-    puts @user.inspect
     session[:return_to] ||= request.referer
     unless @playlist.songs.include? @song
       @playlist.songs << @song
+    end
+    redirect_back(fallback_location: @user)
+  end
+
+  def remove
+    @playlist = Playlist.find_by(id: params[:id])
+    @song = Song.find_by(id: params[:song_id])
+    session[:return_to] ||= request.referer
+    if @playlist.songs.include? @song
+      @playlist.songs.delete(@song)
       redirect_back(fallback_location: @user)
     end
   end
@@ -76,7 +85,7 @@ class PlaylistsController < ApplicationController
 
   def set_playlist
     if params[:playlist_id]
-      @playlist = Playlist.find(id: params[:playlist_id])
+      @playlist = Playlist.find(id: params[:id])
     end
   end
 

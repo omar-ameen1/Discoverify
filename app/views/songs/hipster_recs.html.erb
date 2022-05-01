@@ -1,0 +1,67 @@
+<div class="row align-items-md-stretch my-4">
+  <div class="col-md-12">
+    <div class="h-100 p-5 bg-dark rounded-3">
+      <h3 class="d-flex justify-content-center display-5" style="color: rgb(35, 215, 96)">Your Hipster Recommendations.</h3>
+      <div class="text-center">
+        <a class="btn btn-lg bg-danger" href="/songs/">Back to Discover.</a>
+      </div>
+      <% @tracks.each_slice(3) do |song1, song2, song3| %>
+        <div class="container-fluid">
+          <div class="row mt-3 mb-4 d-flex">
+            <% if song1 %>
+              <div class="col-sm-6">
+                <div class="card text-center bg-black">
+                  <div class="card-body">
+                    <%=image_tag(song1.image, size: "100x100") %>
+                    <h5 class="card-title mt-3" style="color: rgb(35, 215, 96)"><%="#{song1.name}" %></h5>
+                    <p class="card-text " style="color: rgb(35, 215, 96)"><%=h truncate("#{song1.artist}", :length => 120) %></p>
+                    <div class="mt-auto" style="background: black">
+                      <p class="card-text"><small class="text-muted">Popularity: <%="#{song1.popularity}" %></small></p>
+                      <%unless song1.users.include? current_user %>
+                        <%= link_to("Add to library", "/add_song/#{current_user.id}/#{song1.spotify_id}", class: "btn btn-primary", :method => :post) %>
+                      <%end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% if song2 %>
+              <div class="col-sm-6">
+                <div class="card text-center bg-black">
+                  <div class="card-body">
+                    <%=image_tag(song2.image, size: "100x100") %>
+                    <h5 class="card-title mt-3" style="color: rgb(35, 215, 96)"><%="#{song2.name}" %></h5>
+                    <p class="card-text" style="color: rgb(35, 215, 96)"><%=h truncate("#{song2.artist}", :length => 120) %></p>
+                    <div class="mt-auto" style="background: black">
+                      <p class="card-text"><small class="text-muted">Popularity: <%="#{song2.popularity}" %></small></p>
+                      <%unless song2.users.include? current_user %>
+                        <%= link_to("Add to library", "/add_song/#{current_user.id}/#{song2.spotify_id}", class: "btn btn-primary", :method => :post) %>
+                      <%end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% if song3 %>
+              <div class="col-sm-6">
+                <div class="card text-center bg-black my-4">
+                  <div class="card-body">
+                    <%=image_tag(song3.image, size: "100x100") %>
+                    <h5 class="card-title mt-3" style="color: rgb(35, 215, 96)"><%="#{song3.name}" %></h5>
+                    <p class="card-text" style="color: rgb(35, 215, 96)"><%=h truncate("#{song3.artist}", :length => 120) %></p>
+                    <div class="mt-auto" style="background: black">
+                      <p class="card-text"><small class="text-muted">Popularity: <%="#{song3.popularity}" %></small></p>
+                      <%unless song3.users.include? current_user %>
+                        <%= link_to("Add to library", "/add_song/#{current_user.id}/#{song3.spotify_id}", class: "btn btn-primary", :method => :post) %>
+                      <%end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

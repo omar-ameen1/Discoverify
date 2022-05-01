@@ -1,37 +1,96 @@
-<h1>Edit Playlist</h1>
-<div id="songs" class="d-flex flex-nowrap">
-  <% @user.songs.each_slice(2) do |song1, song2| %>
-    <div class="container-fluid">
-      <div class="row mt-3 mb-4 d-flex">
-        <div class="col-sm-6">
-          <div class="card text-center bg-black">
-            <div class="card-body">
-              <%=image_tag(song1.image, size: "100x100") %>
-              <h5 class="card-title mt-3" style="color: rgb(35, 215, 96)"><%="#{song1.name}" %></h5>
-              <p class="card-text " style="color: rgb(35, 215, 96)"><%=h truncate("#{song1.artist}", :length => 120) %></p>
-              <div class="mt-auto" style="background: black">
-                <p class="card-text"><small class="text-muted">Popularity: <%="#{song1.popularity}" %></small></p>
-                <a href="add/<%="#{song1.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">Add Song</a>
-              </div>
-            </div>
+<body class="bg-dark">
+<div class="container">
+  <div class="container-fluid">
+    <div class="row justify-content-center align-content-center">
+      <div class="justify-content-center text-center">
+        <h1 class="text-white justify-content-center">Edit Playlist</h1>
+      </div>
+      <div class="text-center">
+        <a href="/users/<%= @user.id %>/playlists/<%= @playlist.id%>" class="btn btn-lg bg-black text-white justify-content-center">Done</a>
+      </div>
+    </div>
+    <div class="row align-items-md-stretch my-4">
+      <div class="col-md-12">
+        <div class="p-5 bg-success rounded-3">
+          <h3 class="text-white fw-bold d-flex justify-content-center display-5"><%= @playlist.name %></h3>
+          <% @playlist.songs.each_slice(2) do |song1, song2| %>
+            <div class="container-fluid">
+              <div class="row mt-3 mb-4 d-flex">
+                <div class="col-sm-6">
+                  <div class="card text-center bg-black">
+                    <div class="card-body">
+                      <%=image_tag(song1.image, size: "100x100") %>
+                      <h5 class="card-title mt-3" style="color: rgb(35, 215, 96)"><%="#{song1.name}" %></h5>
+                      <p class="card-text " style="color: rgb(35, 215, 96)"><%=h truncate("#{song1.artist}", :length => 120) %></p>
+                      <div class="mt-auto" style="background: black">
+                        <p class="card-text"><small class="text-muted">Popularity: <%="#{song1.popularity}" %></small></p>
+                        <a href="remove/<%="#{song1.id}" %>" class="btn btn-lg bg-danger">Remove Song</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%if song2 %>
+                  <div class="col-sm-6">
+                    <div class="card text-center bg-black">
+                      <div class="card-body">
+                        <%=image_tag(song2.image, size: "100x100") %>
+                        <h5 class="card-title mt-3" style="color: rgb(35, 215, 96)"><%="#{song2.name}" %></h5>
+                        <p class="card-text" style="color: rgb(35, 215, 96)"><%=h truncate("#{song2.artist}", :length => 120) %></p>
+                        <div class="mt-auto" style="background: black">
+                          <p class="card-text"><small class="text-muted">Popularity: <%="#{song2.popularity}" %></small></p>
+                          <a href="remove/<%="#{song2.id}" %>" class="btn btn-lg bg-danger">Remove Song</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+          <% end %>
+          </div>
           </div>
         </div>
-        <%if song2 %>
-          <div class="col-sm-6">
-            <div class="card text-center bg-black">
-              <div class="card-body">
-                <%=image_tag(song2.image, size: "100x100") %>
-                <h5 class="card-title mt-3" style="color: rgb(35, 215, 96)"><%="#{song2.name}" %></h5>
-                <p class="card-text" style="color: rgb(35, 215, 96)"><%=h truncate("#{song2.artist}", :length => 120) %></p>
-                <div class="mt-auto" style="background: black">
-                  <p class="card-text"><small class="text-muted">Popularity: <%="#{song2.popularity}" %></small></p>
-                  <a href="add/<%="#{song2.id}" %>" class="btn btn-lg" style="background: rgb(35, 215, 96)">Add Song</a>
+      </div>
+    </div>
+    <div class="row align-items-md-stretch my-4">
+      <div class="col-md-12">
+        <div class="p-5 bg-black rounded-3">
+          <h3 class="text-white fw-bold d-flex justify-content-center display-5">Your Library Songs</h3>
+          <% @user.songs.each_slice(2) do |song1, song2| %>
+            <div class="container-fluid">
+              <div class="row mt-3 mb-4 d-flex">
+                <div class="col-sm-6">
+                  <div class="card text-center bg-success">
+                    <div class="card-body">
+                      <%=image_tag(song1.image, size: "100x100") %>
+                      <h5 class="card-title mt-3" style="color: black"><%="#{song1.name}" %></h5>
+                      <p class="card-text " style="color: black"><%=h truncate("#{song1.artist}", :length => 120) %></p>
+                      <div class="mt-auto bg-success">
+                        <p class="card-text"><small class="text-black">Popularity: <%="#{song1.popularity}" %></small></p>
+                        <a href="add/<%="#{song1.id}" %>" class="btn btn-lg bg-black text-white">Add Song</a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+                <%if song2 %>
+                  <div class="col-sm-6">
+                    <div class="card text-center bg-success">
+                      <div class="card-body">
+                        <%=image_tag(song2.image, size: "100x100") %>
+                        <h5 class="card-title mt-3" style="color: black"><%="#{song2.name}" %></h5>
+                        <p class="card-text" style="color: black"><%=h truncate("#{song2.artist}", :length => 120) %></p>
+                        <div class="mt-auto bg-success">
+                          <p class="card-text"><small class="text-black">Popularity: <%="#{song2.popularity}" %></small></p>
+                          <a href="add/<%="#{song2.id}" %>" class="btn btn-lg text-white" style="background: black">Add Song</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <%end %>
+          <% end %>
           </div>
-        <%end %>
-  <% end %>
-  </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+</body>
