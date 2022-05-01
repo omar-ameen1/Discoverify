@@ -25,7 +25,7 @@ class SongsUsersController < ApplicationController
 
   def set_user
     puts params
-    @user = User.find_by(params[:user_id])
+    @user = User.find(params[:user_id])
   end
 
   private
