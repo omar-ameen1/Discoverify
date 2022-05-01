@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :playlists
-    get '/new', to: 'playlists#new'
-    get '/create', to: 'playlists#create'
+    get 'playlists/new', to: 'playlists#new'
+    post 'playlists/create', to: 'playlists#create'
     get 'playlists/add/:song_id', to: 'playlists#add'
     get '/users/:user_id/playlists', to: 'users#index'
   end

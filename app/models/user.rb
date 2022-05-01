@@ -3,7 +3,7 @@ class User < ApplicationRecord
   include BCrypt
   has_many :songs_user, dependent: :destroy
   has_many :songs, through: :songs_user
-  has_many :playlist, dependent: :destroy
+  has_many :playlists, dependent: :destroy
 
   def password
     @password ||= Password.new(password_hash)

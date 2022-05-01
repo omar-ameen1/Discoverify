@@ -1,25 +1,25 @@
 class PlaylistsController < ApplicationController
   before_action :get_user
-  before_action :set_playlist, only: %i[ show edit update destroy ]
+  before_action :set_playlists, only: %i[ index edit update destroy ]
+  before_action :set_playlist, only: %i[ show ]
 
   # GET /playlists or /playlists.json
   def index
-    puts "ASDQWADFAGFSEGF"
     redirect_to @user
   end
 
   # GET /playlists/1 or /playlists/1.json
   def show
+    @playlist = Playlist.find_by(id: params[:id])
   end
 
   # GET /playlists/new
   def new
-    puts "XDSDXDXDXD"
-    puts params
   end
 
   # GET /playlists/1/edit
   def edit
+
   end
 
   def add
@@ -35,8 +35,8 @@ class PlaylistsController < ApplicationController
 
   # POST /playlists or /playlists.json
   def create
-    puts "ASDASDA#{params}"
-    @playlist = Playlist.create(name: params[:pname], user_id: @user.id)
+    puts "ASDASDASWE EGWG ETG SDFC SDF"
+    @playlist = Playlist.create(name: params[:name], user_id: @user.id)
     redirect_to @user
   end
 
@@ -65,8 +65,8 @@ class PlaylistsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_playlist
-      @playlist = Playlist.where(user_id: @user.id)
+    def set_playlists
+      @playlists = Playlist.where(user_id: @user.id)
     end
 
     # Only allow a list of trusted parameters through.
@@ -74,7 +74,13 @@ class PlaylistsController < ApplicationController
       params.require(:playlists).permit(:name, :user_id)
     end
 
-  def get_user
-    @user = User.find(params[:user_id])
+  def set_playlist
+    if params[:playlist_id]
+      @playlist = Playlist.find(id: params[:playlist_id])
+    end
   end
+
+    def get_user
+      @user = User.find(params[:user_id])
+    end
 end

@@ -20,7 +20,11 @@
         <% @playlists = Playlist.where(user_id: @user.id) %>
         <% if @playlists %>
           <% @playlists.each do |playlist| %>
-            <p> <%=playlist.name %> </p>
+            <div class="col-sm-5">
+              <a class="my-2 btn btn-lg text-center text-white bg-black align-items-md-stretch w-100" href="/users/<%= @user.id %>/playlists/<%= playlist.id%>">
+                <p class="my-auto"> <%=playlist.name %> </p>
+              </a>
+            </div>
           <% end %>
         <% end %>
       </div>

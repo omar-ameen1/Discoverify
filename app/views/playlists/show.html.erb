@@ -1,8 +1,20 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @playlist %>
-
+<body class="bg-dark">
+<h1 class="text-white"><%= @playlist.name %></h1>
 <div>
-  <%= link_to "Edit this playlist", edit_user_playlist_path(@playlist) %> |
-  <%= link_to "Back to playlists", @user %>
+  <div>
+    <% if @user == current_user %>
+      <a href="/users/<%= @user.id %>/playlists/<%= @playlist.id%>/edit" class="btn btn-lg mt-3" style="background: rgb(35, 215, 96)">Edit Playlist</a>
+    <% end %>
+  </div>
+  <div id="songs">
+    <% if @playlist.songs %>
+      <% @playlist.songs.each_slice(2) do |song1, song2| %>
+        <p> test </p>
+      <% end %>
+    <% end %>
+  </div>
+
 </div>
+</body>
+
+
