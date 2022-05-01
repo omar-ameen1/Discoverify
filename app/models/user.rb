@@ -1,9 +1,12 @@
 require 'bcrypt'
 class User < ApplicationRecord
   include BCrypt
+  include Humanizer
   has_many :songs_user, dependent: :destroy
   has_many :songs, through: :songs_user
   has_many :playlists, dependent: :destroy
+  require_human_on :create
+
 
   def password
     @password ||= Password.new(password_hash)

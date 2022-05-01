@@ -28,6 +28,12 @@
         <%= form.label "password", {class: "form-label"}, style: "color: rgb(35, 215, 96)" %>
         <%= form.password_field :password_hash, class: "form-control" %>
       </div>
+
+        <div class="mb-3 text-white">
+          <%= form.label :humanizer_answer, @user.humanizer_question %>
+          <%= form.text_field :humanizer_answer %>
+          <%= form.hidden_field :humanizer_question_id %>
+        </div>
     </div>
   </div>
   <p>

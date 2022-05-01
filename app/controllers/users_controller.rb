@@ -76,6 +76,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:full_name, :username, :password_hash, :spotifyuid)
+      params.require(:user).permit(:full_name, :username, :password_hash, :spotifyuid, :humanizer_answer, :humanizer_question_id)
     end
 end

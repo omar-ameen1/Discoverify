@@ -12,6 +12,8 @@ gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
 gem "pg"
 
+gem 'humanizer'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -55,9 +57,6 @@ gem "sassc-rails"
 gem "bootstrap_form", "~> 5.0"
 
 gem "bootstrap"
-
-group :production do
-end
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

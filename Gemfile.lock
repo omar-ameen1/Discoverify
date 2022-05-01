@@ -114,6 +114,7 @@ GEM
     hashie (5.0.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
+    humanizer (2.6.4)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -290,6 +291,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  humanizer
   jbuilder
   jsbundling-rails
   pg
